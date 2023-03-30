@@ -8,14 +8,18 @@ const controller = require("./users.controller");
 // router.use("/:movieId/theaters", controller.movieExists, theatersRouter);
 // router.use("/:movieId/reviews", controller.movieExists, reviewsRouter);
 
+const methodNotAllowed = require("../../errors/methodNotAllowed");
 
 router
   .route("/")
   .get(controller.list)
-  // .all(methodNotAllowed);
-// router
-//   .route("/:movieId")
-//   .get(controller.read);
+  .post(controller.create)
+  .all(methodNotAllowed);
 
+router
+  .route("/:userId")
+  .put(controller.update)
+  .delete(controller.delete)
+  .all(methodNotAllowed);
 
 module.exports = router;
